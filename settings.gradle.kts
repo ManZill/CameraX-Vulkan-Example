@@ -22,3 +22,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "CameraX-Vulkan-Example"
 include(":app")
+include(":core:camera")
