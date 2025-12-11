@@ -9,6 +9,7 @@ Java_com_manzill_example_camxvk_core_camera_VulkanCameraEngine_setSurface(
         JNIEnv *env, jobject thiz, jobject surface, jint width, jint height
 )
 {
+    LOGD("setSurface: width=%d, height=%d", width, height);
     // TODO: implement setSurface()
 }
 

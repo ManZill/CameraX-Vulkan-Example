@@ -14,12 +14,20 @@ target_link_options(
         "-Wl,-z,max-page-size=16384"
 )
 
+target_compile_options(
+        vulkan-camera
+        PRIVATE
+        $<$<CONFIG:Debug>:-g>
+        "-fmacro-prefix-map=${CMAKE_CURRENT_SOURCE_DIR}/="
+)
+
 find_library(log-lib log)
 find_library(android-lib android)
+find_library(vulkan-lib vulkan)
 
 target_link_libraries(
         vulkan-camera
         ${log-lib}
         ${android-lib}
-        vulkan
+        ${vulkan-lib}
 )

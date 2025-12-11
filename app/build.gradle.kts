@@ -28,6 +28,10 @@ android {
                 "proguard-rules.pro"
             )
         }
+        debug {
+            isMinifyEnabled = false
+            isJniDebuggable = true
+        }
     }
 
     compileOptions {
