@@ -7,6 +7,9 @@ plugins {
     alias(libs.plugins.kotlin.android)
 }
 
+val appVersionName = (project.findProperty("VERSION_NAME") as? String)
+val (major, minor, patch) = appVersionName?.split(".")?.map { it.toIntOrNull() } ?: listOf(null, null, null)
+
 android {
     namespace = "com.manzill.example.camxvk.core.camera"
     compileSdk {
@@ -14,11 +17,18 @@ android {
     }
 
     defaultConfig {
-        minSdk = 24
+        minSdk = 28
 
         externalNativeBuild {
             cmake {
                 cFlags += "-std=c23 -Wall"
+                arguments += mutableListOf<String>().apply {
+                    add("-DAPP_NAME=\"${rootProject.name}\"")
+
+                    major?.let { add("-DAPP_VERSION_MAJOR=$it") }
+                    minor?.let { add("-DAPP_VERSION_MINOR=$it") }
+                    patch?.let { add("-DAPP_VERSION_PATCH=$it") }
+                }
             }
         }
     }
@@ -44,4 +54,6 @@ kotlin {
 
 dependencies {
     implementation(libs.androidx.core.ktx)
+
+    implementation(libs.androidx.camera.lifecycle)
 }
